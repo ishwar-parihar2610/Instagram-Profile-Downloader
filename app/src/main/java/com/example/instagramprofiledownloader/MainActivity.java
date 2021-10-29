@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    binding.urlEdit.setText(null);
                     JSONObject jsonObject = response.getJSONObject("graphql");
                     JSONObject userObject=jsonObject.getJSONObject("user");
                     String ImageUrl = userObject.getString("profile_pic_url_hd");
@@ -95,10 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
                     if (!imageUrl.isEmpty()){
                         String fullName=userObject.getString("full_name");
+                        String userName=userObject.getString("username");
+
                         Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(MainActivity.this,ImageDownloadActivity.class);
                         intent.putExtra("url",ImageUrl);
-                        intent.putExtra("user_name",fullName);
+                        intent.putExtra("fullName",fullName);
+                        intent.putExtra("userName",userName);
                         startActivity(intent);
                     }
 
@@ -110,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                binding.urlEdit.setText(null);
                 Log.d(TAG, "onErrorResponse: " + error.getLocalizedMessage());
                 Toast.makeText(MainActivity.this, "Failed:"+error.getMessage(), Toast.LENGTH_SHORT).show();
 

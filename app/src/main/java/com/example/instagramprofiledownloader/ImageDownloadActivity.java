@@ -24,8 +24,9 @@ import com.example.instagramprofiledownloader.databinding.ActivityImageDownloadB
 public class ImageDownloadActivity extends AppCompatActivity {
     ActivityImageDownloadBinding binding;
     String url;
+    String fullName;
     String userName;
-    String myName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +38,10 @@ public class ImageDownloadActivity extends AppCompatActivity {
             binding.progressBar.setVisibility(View.GONE);
             binding.userImage.setVisibility(View.VISIBLE);
             Glide.with(this).load(getIntent().getStringExtra("url")).into(binding.userImage);
-            userName=getIntent().getStringExtra("user_name");
-            binding.userName.setText("Full Name:"+userName);
+            fullName=getIntent().getStringExtra("fullName");
+            userName=getIntent().getStringExtra("userName");
+            binding.userName.setText("Full Name - "+fullName);
+            binding.FullName.setText("User Name - "+userName);
             binding.downloadBtn.setOnClickListener(v -> {
                 if (haveStoragePermission()) {
                     downloadImage(ImageDownloadActivity.this, url);
