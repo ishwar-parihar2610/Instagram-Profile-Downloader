@@ -25,6 +25,7 @@ public class ImageDownloadActivity extends AppCompatActivity {
     ActivityImageDownloadBinding binding;
     String url;
     String userName;
+    String myName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
